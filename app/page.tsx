@@ -13,20 +13,25 @@ type Task = {
 export default function Home() {
   const [tasks, setTasks] = useState<Task[]>([]);
 
-  useEffect(() => {
-    const saved = localStorage.getItem("tasks");
+  // useEffect(() => {
+  //   const saved = localStorage.getItem("tasks");
 
-    if (saved) {
-      setTasks(JSON.parse(saved));
-    }
-  }, []);
+  //   if (saved) {
+  //     setTasks(JSON.parse(saved));
+  //   }
+  // }, []);
 
-  useEffect(() => {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-  }, [tasks]);
+  // useEffect(() => {
+  //   localStorage.setItem("tasks", JSON.stringify(tasks));
+  // }, [tasks]);
+  console.log(tasks);
 
   function handleAddTask(task: Task) {
     setTasks((prev) => [...prev, task]);
+  }
+
+  function handleDeleteTask(id: string) {
+    setTasks((prev) => prev.filter((task) => task.id !== id));
   }
 
   return (
@@ -44,7 +49,8 @@ export default function Home() {
           <span className="font-semibold">Tarefas Criadas</span>
           <span className="font-semibold">Concluidas</span>
         </div>
-        <List tasks={tasks} />
+        oi
+        <List handleDeleteTask={handleDeleteTask} tasks={tasks} />
       </body>
     </div>
   );
