@@ -1,5 +1,7 @@
 "use client";
 
+import { Trash } from "lucide-react";
+
 type Task = {
   id: string;
   content: string;
@@ -25,17 +27,17 @@ export default function List({
             key={task.id}
             className="flex w-full items-center justify-between rounded-lg bg-gray-800 px-4 py-3 text-white shadow-md"
           >
-            <div className="w-16">
-              {!task.completed && (
-                <button
-                  onClick={() => handleToggleTaskCompletion(task.id)}
-                  className="rounded bg-green-500 px-3 py-2 text-white"
-                >
-                  ✅
-                </button>
-              )}
-            </div>
+            {/* CÍRCULO */}
+            <button
+              onClick={() => handleToggleTaskCompletion(task.id)}
+              className={`h-6 w-6 rounded-full border-2 transition-all cursor-pointer ${
+                task.completed
+                  ? "bg-gray-400 border-gray-400"
+                  : "border-gray-400"
+              }`}
+            />
 
+            {/* TEXTO */}
             <span
               className={`mx-4 flex-1 text-center ${
                 task.completed ? "line-through text-gray-400" : ""
@@ -44,11 +46,12 @@ export default function List({
               {task.content}
             </span>
 
+            {/* LIXEIRA */}
             <button
               onClick={() => handleDeleteTask(task.id)}
-              className="rounded bg-red-500 px-4 text-white"
+              className="flex items-center justify-center rounded p-2 text-red-400 hover:bg-gray-700 hover:text-red-500 transition-all cursor-pointer"
             >
-              Apagar
+              <Trash size={18} />
             </button>
           </li>
         ))}

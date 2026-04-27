@@ -30,25 +30,34 @@ export default function TaskBar({ onAddTask }: TaskBarProps) {
   }
 
   return (
-    <div className="flex flex-col items-center gap-4">
+    <div className="mx-auto mt-4 w-full max-w-200 px-4">
       <form
         onSubmit={(e) => {
           e.preventDefault();
           onAddTaskSubmit(content);
         }}
       >
-        <div className="flex gap-2">
-          <input
-            className="border rounded px-3 py-2"
-            type="text"
-            placeholder="Adicionar uma nova tarefa"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-          />
+        <div className="flex items-center gap-4">
+          
+          {/* INPUT (barra estilo lista) */}
+          <div className="flex flex-1 items-center rounded-lg bg-gray-500 px-4 py-3 shadow-md">
+            <input
+              className="w-full bg-transparent outline-none text-white placeholder-gray-400"
+              type="text"
+              placeholder="Adicionar uma nova tarefa"
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+            />
+          </div>
 
-          <button className="bg-blue-500 text-white px-4 rounded" type="submit">
+          {/* BOTÃO FORA */}
+          <button
+            className="rounded bg-gray-500 px-4 py-3 text-white hover:bg-blue-600 transition-all"
+            type="submit"
+          >
             Criar
           </button>
+
         </div>
       </form>
     </div>
