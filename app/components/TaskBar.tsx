@@ -6,6 +6,7 @@ import { v4 } from "uuid";
 type Task = {
   id: string;
   content: string;
+  completed: boolean;
 };
 
 type TaskBarProps = {
@@ -21,6 +22,7 @@ export default function TaskBar({ onAddTask }: TaskBarProps) {
     const newTask = {
       id: v4(),
       content,
+      completed: false,
     };
 
     onAddTask(newTask);
