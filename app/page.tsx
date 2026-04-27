@@ -7,7 +7,23 @@ import List from "./components/List";
 import { Task } from "./types/tasks";
 
 export default function Home() {
+  /*Aqui é criado um estado (um valor que pode mudar ao longo do tempo e que controla o que aparece na tela.) chamado "tasks"
+  *E uma função chamada "setTasks"
+  **/
   const [tasks, setTasks] = useState<Task[]>([]);
+/**
+ * Aqui eu uso esse hasLoadedTasks porque:
+ * Quando o usuário entra no sistema, o componente
+ * é carregado e o estado "tasks" começa vazio ([]).
+ * Porém, o localStorage pode já ter tarefas salvas
+ * de acessos anteriores.
+ * Se o sistema salvasse nesse momento, o localStorage
+ * receberia [] e apagaria as tarefas que já estavam salvas.
+ * O hasLoadedTasks é usado para garantir que o
+ * localStorage só seja atualizado depois que as
+ * tarefas forem carregadas corretamente.
+ */
+
   const hasLoadedTasks = useRef(false);
 
   useEffect(() => {
