@@ -73,6 +73,14 @@ export default function Home() {
     );
   }
 
+  function handleCountTasks() {
+    return tasks.length;
+  }
+
+  function handleCountCompletedTasks() {
+    return tasks.filter((task) => task.completed).length;
+  }
+
   return (
     <div className="">
       <header>
@@ -85,8 +93,8 @@ export default function Home() {
       </main>
       <div className="min-h-full flex flex-col">
         <div className="mx-auto mt-2 flex w-full max-w-200 items-center justify-between px-4">
-          <span className="font-semibold">Tarefas Criadas</span>
-          <span className="font-semibold">Concluidas</span>
+          <span className="font-semibold" >Tarefas Criadas: {handleCountTasks()}</span>
+          <span className="font-semibold">Concluidas: {handleCountCompletedTasks()}</span>
         </div>
         <List
           handleDeleteTask={handleDeleteTask}
