@@ -1,13 +1,13 @@
 "use client";
 
 import { Trash } from "lucide-react";
+import { Task } from "../types/tasks";
 
-type Task = {
-  id: string;
-  content: string;
-  completed: boolean;
-};
-
+/* Aqui eu to falando que o componente de lista vai receber as seguintes props: 
+* Um array contendo as tarefas
+* a função que delata uma task baseada no id 
+* e a função que altera o status de uma tarefa baseada no id dela 
+*/
 type ListProps = {
   tasks: Task[];
   handleDeleteTask(id: string): void;

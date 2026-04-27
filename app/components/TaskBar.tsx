@@ -2,12 +2,7 @@
 
 import { useState } from "react";
 import { v4 } from "uuid";
-
-type Task = {
-  id: string;
-  content: string;
-  completed: boolean;
-};
+import { Task } from "../types/tasks";
 
 type TaskBarProps = {
   onAddTask: (task: Task) => void;
@@ -16,6 +11,28 @@ type TaskBarProps = {
 export default function TaskBar({ onAddTask }: TaskBarProps) {
   const [content, setContent] = useState("");
 
+  /**
+ * FUNÇÃO: onAddTaskSubmit
+ *
+ * OBJETIVO:
+ * Essa função é para adicionar uma nova task no clique do botão criar
+ *
+ * QUANDO É USADA:
+ * ela é usada quando o user clica no botão criar e o formulario de criação da task é enviada 
+ *
+ * ENTRADAS (PARAMS):
+ * Os parametros é o texto que o usuario passou como nome da task
+ *
+ * SAÍDA:
+ * Ela seta no LocalStorage uma nova task 
+ *
+ * POR QUE FOI FEITA ASSIM:
+ * Oque eu imaginei: 
+ * Ter uma um formulario, onde o campo vai ser o nome da task, e que ao clicar no botão
+ * criar, ele envia as informações desse formulario para o storage que ta o array de
+ * tasks
+ *
+ */
   function onAddTaskSubmit(content: string) {
     if (!content.trim()) return;
 

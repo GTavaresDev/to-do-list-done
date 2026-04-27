@@ -1,3 +1,4 @@
+//Aqui é apenas o componente de header do site
 export default function Header() {
   return (
     <div className="bg-black flex flex-row justify-center items-center h-55">

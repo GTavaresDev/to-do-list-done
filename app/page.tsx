@@ -4,12 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Header from "./components/Header";
 import TaskBar from "./components/TaskBar";
 import List from "./components/List";
-
-type Task = {
-  id: string;
-  content: string;
-  completed: boolean;
-};
+import { Task } from "./types/tasks";
 
 export default function Home() {
   const [tasks, setTasks] = useState<Task[]>([]);
