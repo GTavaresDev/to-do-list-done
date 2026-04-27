@@ -22,6 +22,16 @@ export default function List({
   return (
     <div className="mx-auto mt-4 w-full max-w-200 px-4">
       <ul className="flex flex-col gap-6">
+        {(!tasks || tasks.length === 0) && (
+          <li
+            className="flex flex-col items-center justify-center rounded-lg bg-gray-800 px-4 py-3 text-white shadow-md"
+            key="empty-list"
+          >
+            <span className="font-extrabold text-gray-400">Voce ainda não tem tarefas cadastradas</span>
+            <span className="text-gray-400">Crie tarefas e organize seus itens a fazer</span>
+          </li>
+        )}
+
         {tasks.map((task) => (
           <li
             key={task.id}
@@ -32,8 +42,8 @@ export default function List({
               onClick={() => handleToggleTaskCompletion(task.id)}
               className={`h-6 w-6 rounded-full border-2 transition-all cursor-pointer ${
                 task.completed
-                  ? "bg-gray-400 border-gray-400"
-                  : "border-gray-400"
+                  ? "bg-purple-800 border-purple-800"
+                  : "border-blue-500 bg-transparent"
               }`}
             />
 

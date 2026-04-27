@@ -7,22 +7,7 @@ import List from "./components/List";
 import { Task } from "./types/tasks";
 
 export default function Home() {
-  /*Aqui é criado um estado (um valor que pode mudar ao longo do tempo e que controla o que aparece na tela.) chamado "tasks"
-  *E uma função chamada "setTasks"
-  **/
   const [tasks, setTasks] = useState<Task[]>([]);
-/**
- * Aqui eu uso esse hasLoadedTasks porque:
- * Quando o usuário entra no sistema, o componente
- * é carregado e o estado "tasks" começa vazio ([]).
- * Porém, o localStorage pode já ter tarefas salvas
- * de acessos anteriores.
- * Se o sistema salvasse nesse momento, o localStorage
- * receberia [] e apagaria as tarefas que já estavam salvas.
- * O hasLoadedTasks é usado para garantir que o
- * localStorage só seja atualizado depois que as
- * tarefas forem carregadas corretamente.
- */
 
   const hasLoadedTasks = useRef(false);
 
@@ -55,7 +40,6 @@ export default function Home() {
 
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
-  console.log(tasks);
 
   function handleAddTask(task: Task) {
     setTasks((prev) => [...prev, task]);
@@ -81,21 +65,44 @@ export default function Home() {
     return tasks.filter((task) => task.completed).length;
   }
 
+  const completedCount = handleCountCompletedTasks();
+
   return (
     <div className="">
       <header>
         <Header />
       </header>
-      <main className="">
-        <div className="py-5 flex flex-col justify-center items-center ">
+
+      <main>
+        <div className="py-5 flex flex-col justify-center items-center">
           <TaskBar onAddTask={handleAddTask} />
         </div>
       </main>
+
       <div className="min-h-full flex flex-col">
         <div className="mx-auto mt-2 flex w-full max-w-200 items-center justify-between px-4">
-          <span className="font-semibold" >Tarefas Criadas: {handleCountTasks()}</span>
-          <span className="font-semibold">Concluidas: {handleCountCompletedTasks()}</span>
+          
+          {/* Tarefas criadas */}
+          <span className="font-extrabold text-blue-500 flex items-center gap-2">
+            Tarefas Criadas:
+            <span className="bg-gray-400 text-white px-3 py-1 rounded-full text-sm">
+              {handleCountTasks()}
+            </span>
+          </span>
+
+          {/* Tarefas concluídas */}
+          <span className="font-extrabold text-purple-800 flex items-center gap-2">
+            Concluídas:
+            <span
+              className={`px-3 py-1 text-white text-sm rounded-full transition-colors
+                ${completedCount > 0 ? "bg-green-500" : "bg-gray-400"}
+              `}
+            >
+              {completedCount}
+            </span>
+          </span>
         </div>
+
         <List
           handleDeleteTask={handleDeleteTask}
           handleToggleTaskCompletion={handleToggleTaskCompletion}
